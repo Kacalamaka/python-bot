@@ -54,7 +54,7 @@ def hasDonated(username):
         Local_reg_user[username][3] = "1" # change local dict
         
         counter_help = Local_reg_user[username][2]
-        reg_user.setData(username,"counter_help",str(int(counter_help)+1)) # change spreadsheet
+            reg_user.setData(username,"counter_help",str(int(counter_help)+1)) # change spreadsheet
         Local_reg_user[username][2] = str(int(counter_help)+1) # change local dict
         
         return 0
@@ -107,6 +107,13 @@ def main():
                           url_path=TOKEN)
     updater.bot.setWebhook("https://{}.herokuapp.com/{}".format(NAME, TOKEN))
     updater.idle()
-
+    
+   
 if __name__ == '__main__':
-    main()
+    logger.info("Starting bot")
+    updater = Updater(TOKEN)
+
+    updater.dispatcher.add_handler(CommandHandler("start", start_handler))
+    updater.dispatcher.add_handler(CommandHandler("random", random_handler))
+
+    run(updater)
